@@ -1,0 +1,50 @@
+\name{createImage}
+\alias{createImage}
+
+\title{Image Creation}
+\description{This function creates a levelplot of the result-grid of species range estimation and saves it as a PNG-File.}
+\usage{createImage(grid, landwatermask, image.title, directory, filename, shift, parts=10, resolution=1)}
+\arguments{
+  \item{grid}{The grid that should be plotted. It contains the weighted species richness information.}
+  \item{landwatermask}{A grid containing the land-water-information of the observed area. 
+			If a grid cell containes no land, the value of the cell in the 
+			landwatermask is -1, otherwise it is 0.}
+  \item{image.title}{The heading of the created image.}
+  \item{directory}{The directory in which the image should be stored.}
+  \item{filename}{The filename of the created PNG-File.}
+  \item{shift}{The geographic coordinates of the origin of the grid.}
+  \item{parts}{An Integer value determining the number of divisions in the colorkey of the created image.}
+  \item{resolution}{The resolution of the grid in (geographical) degree.}
+}
+\details{This routine creates a levelplot of the weighted 
+	species richness information and stores it as a PNG-File.
+	The package lattice is required.}
+\value{The return type is boolean. The value is TRUE if the image-creation 
+	was successful and FALSE if the image-creation has failed.}
+
+\author{Maximilian Lange, Sven Lautenbach}
+
+\examples{
+##load data
+\donttest{data(dataset.all.species)}
+\donttest{data(dataset.landwater)}
+
+##create grid parameters
+\donttest{dimension <- getDimension(dataset.all.species, resolution=1)}
+\donttest{shift <- getShift(dataset.all.species)}
+
+##create landwatermask
+\donttest{landwatermask.nocoast <- createLandwatermask(dataset.landwater, 
+						dimension, shift, resolution=1)}
+
+##estimate species richness
+\donttest{species.richness.weighted <- species.richness(dataset.all.species, 
+						landwatermask.nocoast, weight=0.5, dimension, 
+						shift, resolution=1, parallel=FALSE)}
+
+##create image
+\donttest{image.success <- createImage(species.richness.weighted, landwatermask.nocoast, 
+	    directory=getwd(), filename="species.richness.test01.png", shift, resolution=1)}
+\donttest{print(image.success)}
+}
+

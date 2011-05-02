@@ -1,0 +1,60 @@
+species.range <- 
+function(dataset.one.species, distance, dimension, shift, 
+		resolution=1, landwatermask, upperbound=5, 
+		cross.validation=FALSE){	
+	#create grid
+	grid <- matrix(0,dimension[1],dimension[2])
+
+	#add points
+	grid <- add.Data.to.Grid(dataset.one.species, dimension, shift, resolution)
+
+	#points into list
+	points <- which(grid > 0)
+	points.xy <- list()
+	
+	for (i in 1:length(points)){
+		points.xy[[i]] <- c(ifelse((points[i] %% dimension[1]) == 0, dimension[1], points[i] %% dimension[1]), 
+					ceiling(points[i]/dimension[1]))
+	}
+
+	if (cross.validation){
+		#test for neighbours
+		points.valid <- list()
+
+		for (i in 1:length(points)){
+			point <- points.xy[[i]]
+			neighbour.found <- FALSE
+			for (j in length(points.xy)){
+				if (i != j){
+					neighbour.found <- ifelse(getDistance(point,points.xy[[j]], resolution) <= distance, TRUE, neighbour.found)
+				}
+				if (neighbour.found){
+					break
+				}
+			}	
+			if (neighbour.found){
+				points.valid[[length(points.valid)+1]] <- point
+			}
+	 	}
+
+		if (length(points.valid) < 2){
+			return(matrix(0,dimension[1],dimension[2]))
+		}
+	
+		points.xy <- points.valid
+	}
+
+	#add edges
+	for (i in 1:length(points.xy)){
+		for (j in 1:length(points.xy)){
+			if ((i!=j)&&(getDistance(points.xy[[i]],points.xy[[j]], resolution) <= distance )&&(!edgeNotValid(grid, points.xy[[i]],points.xy[[j]], landwatermask, upperbound))){
+				grid <- add.Edges(grid, points.xy[[i]],points.xy[[j]])
+			}
+		}
+	}
+
+	#add areas
+	grid <- fill.Areas(grid, landwatermask)
+
+	return(grid)
+}
