@@ -12,7 +12,7 @@ function(species.richness, noninterpolatedgrid, clusterlist){
 			pixel.value <- ifelse(noninterpolatedgrid[pixel] < 0, 0, noninterpolatedgrid[pixel])
 			quotient <- ifelse(is.nan(pixel.value/maxc),0,pixel.value/maxc)
 			quotient <- ifelse(is.infinite(quotient),0,quotient)
-			species.richness[pixel] <- species.richness[pixel] * (1 - quotient)
+			species.richness[pixel] <- (species.richness[pixel]-noninterpolatedgrid[pixel]) * (1 - quotient) + noninterpolatedgrid[pixel]
 		}
 		return(species.richness)
 	}	

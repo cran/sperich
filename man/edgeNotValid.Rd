@@ -48,12 +48,14 @@
 \donttest{points <- which(grid > 0)}
 \donttest{points.xy <- list()}
 \donttest{for (i in 1:length(points)){
-		points.xy[[i]] <- c(ifelse((points[i] %% dimension[1]) == 0, dimension[1], points[i] %% dimension[1]), 
-				ceiling(points[i]/dimension[1]))
+		points.xy[[i]] <- c(ifelse((points[i] \%\% dimension[1]) == 0, dimension[1], 
+					points[i] \%\% dimension[1]), 
+					ceiling(points[i]/dimension[1]))
 	}
 }
 
 ##Edge-Water-Test
-\donttest{check <- edgeNotValid(grid, points.xy[[1]],points.xy[[2]], landwatermask.nocoast)}
+\donttest{check <- edgeNotValid(grid, points.xy[[1]],points.xy[[2]], 
+				landwatermask.nocoast, 1000)}
 \donttest{print(check)}
 }

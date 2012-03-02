@@ -31,9 +31,9 @@
 						dimension, shift, resolution=1)}
 
 ##estimate species richness
-\donttest{species.richness.weighted <- species.richness(dataset.all.species, 
-						landwatermask.nocoast, weight=0.5, dimension, 
-						shift, resolution=1, parallel=FALSE)}
+\donttest{species.richness.weighted <- species.richness(dataset.all.species,
+landwatermask.nocoast, distances=1:10, weight=0.5, dimension,
+shift, resolution=1, upperbound=3000, all.species=1:20)}
 
 ##export
 \donttest{exportAsGDAL(species.richness.weighted, shift, resolution=1, 

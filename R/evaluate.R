@@ -50,8 +50,10 @@ function(result.grid.one, result.grid.two, title.one="Histogramm of species rich
 		png(paste(directory, filename, sep=""), width=500, height=500)
 		cmrg <- ceiling(max(result.grid))
 		cmrg <- ifelse((cmrg %% 5) == 0, cmrg, cmrg + (5- (cmrg %% 5)))
-	 	steps <- ifelse(cmrg > 100, 5, cmrg/20)
-		hist(x, breaks=seq(from=0, to=cmrg, by=steps), main=title, xlab="number of species", xlim=c(0,xmax), ylim=c(0,ymax))
+	 	steps <- ifelse(cmrg > 50, 5, 1)
+		hist(x, breaks=seq(from=0, to=cmrg, by=steps), main=title, 
+				xlab="number of species", xlim=c(0,xmax), ylim=c(0,ymax), las=1, 
+				col=gray(.7))
 
 		#quantils and sum over all cells
 		result <- c(summary(x),round(sum(x), digits=2))
@@ -73,7 +75,7 @@ function(result.grid.one, result.grid.two, title.one="Histogramm of species rich
 	if (numberofgrids == 2){
 		png(paste(directory, filename, sep=""), width=1000, height=500)
 		#double window
-		layout(rbind(c(1,2)),height=c(1), respect=FALSE)
+		layout(rbind(c(1,2)),heights=c(1), respect=FALSE)
 
 		#create the two plots
 		while (numberofgrids > 0){
@@ -92,7 +94,10 @@ function(result.grid.one, result.grid.two, title.one="Histogramm of species rich
 			x <- result.grid[which(result.grid > 0)]
 			cmrg <- ceiling(max(result.grid))
 			cmrg <- ifelse((cmrg %% 5) == 0, cmrg, cmrg + (5- (cmrg %% 5)))
-			hist(x, breaks=seq(from=0, to=cmrg, by=5), main=title, xlab="number of species",xlim=c(0,xmax), ylim=c(0,ymax))
+			steps <- ifelse(cmrg > 50, 5, 1)
+			hist(x, breaks=seq(from=0, to=cmrg, by=steps), main=title, 
+				xlab="number of species", xlim=c(0,xmax), ylim=c(0,ymax), las=1, 
+				col=gray(.7))
 
 			#quantils and sum over all cells
 			result <- c(summary(x),round(sum(x), digits=2))

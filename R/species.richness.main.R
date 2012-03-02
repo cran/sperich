@@ -54,6 +54,8 @@ function(dataset.all.species, dataset.landwater, dataset.height, distance.max=10
 	}
 
 	if (adjust){
+		if (!silent)
+			cat("Adjusting grid .. ")
 		if (is.null(noninterpolatedgrid)){
 			noninterpolatedgrid <- createNonInterpolatedGrid(dataset.all.species, 
 							dimension, shift, resolution, all.species)
@@ -68,12 +70,15 @@ function(dataset.all.species, dataset.landwater, dataset.height, distance.max=10
 
 		species.richness.weighted <- adjustment(species.richness.weighted, noninterpolatedgrid,
 								clusterlist)
+		if (!silent)
+			cat("Done!\n")
 	}
 
 	if (create.image){
 		if (!silent)
 			cat("Creating Map (PNG-File).. ")
-		if(createImage(species.richness.weighted, landwatermask, directory, filename, shift)){
+		if(createImage(species.richness.weighted, landwatermask, image.title, directory, 
+				filename, shift, parts=10, resolution)){
 			if (!silent)
 				cat("PNG-File successfully created!\n")
 		} else {
@@ -85,7 +90,7 @@ function(dataset.all.species, dataset.landwater, dataset.height, distance.max=10
 		if (!silent)
 			cat("Creating Evaluation (PNG-File).. ")
 		if(evaluate(result.grid.one=species.richness.weighted, result.grid.two=NULL, 
-				title.one=title, title.two=NULL, xmax=400, directory=directory, 
+				title.one=eval.title, title.two=NULL, xmax=400, directory=directory, 
 				filename=paste(substring(filename, 1, nchar(filename)-4),".histogramm.png",sep=""))){
 			if (!silent)
 				cat("PNG-File successfully created!\n")
@@ -101,6 +106,8 @@ function(dataset.all.species, dataset.landwater, dataset.height, distance.max=10
 		exportAsGDAL(species.richness.weighted, shift, resolution, 
 				directory=directory, filename=exportname, 
 				drivername=drivername)
+		if (!silent)
+			cat("Done!\n")
 	}
 
 	return(species.richness.weighted)

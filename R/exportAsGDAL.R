@@ -11,15 +11,6 @@ function(grid, shift, resolution, directory=getwd(), filename="grid.tif", driver
 	for (i in 1:length(direc)){
 		directory <- paste(directory,direc[i], sep="")
 	}
-	#check filename
-	file <- unlist(strsplit(filename,""))
-	filename <- ""
-	if ((file[length(file)-3]!=".")||(file[length(file)-2]!="p")||(file[length(file)-1]!="n")||(file[length(file)]!="g")){
-		file <- c(file,".","p","n","g")
-	}
-	for (i in 1:length(file)){
-			filename <- paste(filename,file[i], sep="")
-	}
 
 	#get Dimension
 	dimension <- dim(grid)
@@ -30,8 +21,8 @@ function(grid, shift, resolution, directory=getwd(), filename="grid.tif", driver
 	for (m in 1:dimension[1]){
 		for ( n in 1:dimension[2]){
 			values[count] <- grid[m,n]
-			long[count] <- shift[1] + resolution*n
-			lat[count] <- shift[2] + resolution*m
+			long[count] <- shift[1] + resolution*(m-1)
+			lat[count] <- shift[2] + resolution*(n-1)
 			count <- count + 1
 		}
 	}

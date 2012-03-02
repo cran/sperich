@@ -21,7 +21,9 @@ function(dataset.height,dimension, shift, resolution=1){
 		#insert data into grid
 		for (i in 1:length(long)){
 			if (((long[i]+1) > 0) && (long[i] < dimension[1]) && ((lat[i]+1) > 0)&& (lat[i] < dimension[2])){
-				height.matrix[long[i]+1,lat[i]+1] <- height[i]
+				if (height.matrix[long[i]+1,lat[i]+1] < height[i]){
+					height.matrix[long[i]+1,lat[i]+1] <- height[i]
+				}
 			}
 		}
 	}

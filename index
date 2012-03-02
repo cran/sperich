@@ -1,21 +1,22 @@
 species.richness.main 		The main function to estimate or cross-validate the species richness based on given species occurences.
-species.richness 			Estimates the species richness based on given species occurences.
-species.richness.cv			Cross-validates the species richness based on given species occurences.
-species.range				Estimates the species range based on given occurences of one species.
-extract.species 			Extracts the datasets of one species out of a database filled with species and their occurence locations.
-getDimension				Calculates the dimension of the grid which should be used for a species richness estimation.
-getShift				Calculates the origin of the grid used for a species richness estimation.
-getDistance				Calculates the distance of two points in a grid.
-add.Data.to.Grid			Adds the species occurence data to the grid.
-add.Edges				Adds an edge between two points to a grid.
-edgeNotValid				Checks if an edge would cross a water or mountain surface.
-fill.Areas				Fills all bounded areas in a grid.
-createLandwatermask			Creates a land-water-mask as a grid based on given dimension and coordinates.
-createHeightmask			Creates a height-mask as a grid based on given dimension and coordinates.
-generate.subsamples			Creates an array of subsamples of a dataset.
-createImage				Creates a levelplot of the result-grid of species range estimation and saves it as a PNG-File.
-evaluate 				Evaluates the result grids of species richness estimation and creates a PNG-File with histogramm and statistic information.
-exportAsGDAL				Exports the result grid as a GDAL grid map.
-createNonInterpolatedGrid		Creates a grid containing the species occurences.
-adjustment				Adjusts the weighted species richness for sampling effort.
+species.richness 		Estimates the species richness based on given species occurences.
+species.richness.nonweighted	Estimates the species richness for a given distance based on given species occurences without using weighting factor.
+species.richness.cv		Cross-validates the species richness based on given species occurences.
+species.range			Estimates the species range based on given occurences of one species.
+extract.species 		Extracts the datasets of one species out of a database filled with species and their occurence locations.
+getDimension			Calculates the dimension of the grid which should be used for a species richness estimation.
+getShift			Calculates the origin of the grid used for a species richness estimation.
+getDistance			Calculates the distance of two points in a grid.
+add.Data.to.Grid		Adds the species occurence data to the grid.
+add.Edges			Adds an edge between two points to a grid.
+edgeNotValid			Checks if an edge would cross a water or mountain surface.
+fill.Areas			Fills all bounded areas in a grid.
+createLandwatermask		Creates a land-water-mask as a grid based on given dimension and coordinates.
+createHeightmask		Creates a height-mask as a grid based on given dimension and coordinates.
+generate.subsamples		Creates an array of subsamples of a dataset.
+createImage			Creates a levelplot of the result-grid of species range estimation and saves it as a PNG-File.
+evaluate 			Evaluates the result grids of species richness estimation and creates a PNG-File with histogramm and statistic information.
+exportAsGDAL			Exports the result grid as a GDAL grid map.
+createNonInterpolatedGrid	Creates a grid containing the species occurences.
+adjustment			Adjusts the weighted species richness for sampling effort.
 searchClusters			Searches clusters in the result grid of species richness estimation.

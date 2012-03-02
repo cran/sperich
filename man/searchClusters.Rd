@@ -33,10 +33,9 @@
 					dimension, shift, resolution=1)}
 
 ##estimate species richness
-\donttest{species.richness.weighted <- species.richness(dataset.all.species, 
-		landwatermask.nocoast, weight=0.5, dimension, shift, resolution=1,
-		upperbound=5, narrow.endemic=FALSE, narrow.endemic.limit=5, 
-		parallel=FALSE, all.species=1:20)}
+\donttest{species.richness.weighted <- species.richness(dataset.all.species,
+landwatermask.nocoast, distances=1:10, weight=0.5, dimension,
+shift, resolution=1, upperbound=3000, all.species=1:20)}
 
 ##prepare clustersearch
 \donttest{clusterlimit <- 100}

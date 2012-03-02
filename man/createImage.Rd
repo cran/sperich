@@ -3,7 +3,9 @@
 
 \title{Image Creation}
 \description{This function creates a levelplot of the result-grid of species range estimation and saves it as a PNG-File.}
-\usage{createImage(grid, landwatermask, image.title, directory, filename, shift, parts=10, resolution=1)}
+\usage{createImage(grid, landwatermask, image.title, 
+			directory, filename, shift, 
+			parts=10, resolution=1)}
 \arguments{
   \item{grid}{The grid that should be plotted. It contains the weighted species richness information.}
   \item{landwatermask}{A grid containing the land-water-information of the observed area. 
@@ -39,12 +41,13 @@
 
 ##estimate species richness
 \donttest{species.richness.weighted <- species.richness(dataset.all.species, 
-						landwatermask.nocoast, weight=0.5, dimension, 
-						shift, resolution=1, parallel=FALSE)}
+						landwatermask.nocoast, distances=1:10, weight=0.5, dimension, 
+						shift, resolution=1, upperbound=3000, all.species=1:20)}
 
 ##create image
 \donttest{image.success <- createImage(species.richness.weighted, landwatermask.nocoast, 
-	    directory=getwd(), filename="species.richness.test01.png", shift, resolution=1)}
+	    image.title="Test", directory=getwd(), filename="species.richness.test01.png", 
+	    shift, parts=10, resolution=1)}
 \donttest{print(image.success)}
 }
 

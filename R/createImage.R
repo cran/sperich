@@ -57,7 +57,7 @@ function(grid, landwatermask, image.title, directory, filename, shift, parts=10,
 	}
 
 	#create levelplot
-	png(file=paste(directory,filename,sep=""), width=2000, height=2000, res=100)
+	png(filename=paste(directory,filename,sep=""), width=2000, height=2000, res=100)
 	trellis.par.set(fontsize=list(text=25,points=8))
 	picture <- levelplot(data$richness ~ data$x + data$y, data, at=c(-2,-1,breaks), contour=FALSE, 
 			col.regions=c("lightgray","gray",colors), 

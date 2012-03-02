@@ -21,7 +21,7 @@ function(dataset.one.species, distance, dimension, shift,
 		#test for neighbours
 		points.valid <- list()
 
-		for (i in 1:length(points)){
+		for (i in 1:length(points.xy)){
 			point <- points.xy[[i]]
 			neighbour.found <- FALSE
 			for (j in length(points.xy)){
@@ -37,7 +37,7 @@ function(dataset.one.species, distance, dimension, shift,
 			}
 	 	}
 
-		if (length(points.valid) < 2){
+		if (length(points.valid) == 0){
 			return(matrix(0,dimension[1],dimension[2]))
 		}
 	

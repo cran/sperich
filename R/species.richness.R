@@ -3,10 +3,20 @@ function(dataset.all.species, landwatermask, distances=1:10, weight=0.5,
 		dimension, shift, resolution=1, upperbound, 
 		narrow.endemic=FALSE, narrow.endemic.limit=5, 
 		all.species=-1, silent=TRUE){
+	#check species
 	if (all.species[1]==-1){
-		number.of.species <- max(dataset.all.species$speciesID)
-		all.species <- 1:number.of.species
+		all.species <- unique(dataset.all.species$speciesID)
+	} else {
+		all.species.tmp <- c()
+		for (species in all.species){
+			if (length(which(dataset.all.species$speciesID == species)==TRUE) > 0){
+				all.species.tmp <- c(all.species.tmp, species)
+			}
+		}
+		all.species <- all.species.tmp
 	}
+	number.of.species <- length(all.species)
+	message <- ""
 
 	#create grids
 	species.richness.weighted <- matrix(0, dimension[1], dimension[2])
@@ -36,8 +46,16 @@ function(dataset.all.species, landwatermask, distances=1:10, weight=0.5,
 			species.richness.weighted <- species.richness.weighted + species.richness.weighted.one.species
 		}
 		
-		if (!silent)
-			cat("Species ",species," done!\n", sep="")	
+		if (!silent){
+			cat(rep("\b", nchar(message)),sep="")
+			message <- paste("Species ",which(species==all.species)," of ",number.of.species," done!", sep="")
+			cat(message)
+			flush.console()
+		}	
+	}
+	
+	if (!silent){
+		cat("\n")
 	}
 
 	return(species.richness.weighted)

@@ -1,11 +1,12 @@
-\name{species.richness.cv}
-\alias{species.richness.cv}
+\name{species.richness.nonweighted}
+\alias{species.richness.nonweighted}
 
-\title{Species richness cross-validation}
-\description{This function cross-validates the species richness based on given species occurences.}
-\usage{species.richness.cv(dataset.all.species, landwatermask, fold=5, 
-	loocv.limit=10, distances=2:10, weight=0.5, dimension, shift, 
-	resolution=1, upperbound, all.species=-1, silent=TRUE)}
+\title{Species richness estimation without weighting}
+\description{This function estimates the species richness for a given distance based on given species occurences without using weighting factor.}
+\usage{species.richness.nonweighted(dataset.all.species, landwatermask, 
+	distance=10, dimension, shift, resolution=1,
+	upperbound, narrow.endemic=FALSE, narrow.endemic.limit=5,
+	all.species=-1, silent=TRUE)}
 \arguments{
   \item{dataset.all.species}{A dataset containing the species with their ID 
 			(named: speciesID)and the longitude (named: long) and 
@@ -14,24 +15,24 @@
 			If a grid cell containes no land, the value of the cell in the 
 			landwatermask is -1, otherwise it is 0. Additional, height-informations could 
 		be added for land surfaces. In this case, take care of the 'upperbound' value.}
-  \item{fold}{The number of groups which should be created if the number of occurences is greater than loocv.limit.}
-  \item{loocv.limit}{The limit below which the subsamples are created for a leave-one-out-cross-validation instead of a k-fold-cross-validation.}
-  \item{distances}{The distances which will be used for species range estimation. Should start with value 2.}
-  \item{weight}{The tuning parameter of the weighting procedure (details in Raedig et al. 2010).}
+  \item{distance}{The distance which will be used for species range estimation.}
   \item{dimension}{The dimension of the processed grid.}
   \item{shift}{The geographic coordinates of the origin of the grid.}
   \item{resolution}{The resolution of the grid in (geographical) degree.}
   \item{upperbound}{This value determines the height (based on values in 'landwatermask') 
 		which is considered to be a barrier for species distribution.}
+  \item{narrow.endemic}{A boolean flag that determines if only narrow endemic species 
+			should be considered in species richness estimation.}
+  \item{narrow.endemic.limit}{This value determines the limit of points up to 
+			which a species is considered as narrow endemic species.}
   \item{all.species}{The vector with the numbers of the species which should be mentioned. If the first value is -1, 
 		all species in the database will be used for species richness estimation.}
   \item{silent}{A boolean flag that determines wether the report of status messages should be suppressed or not. }
 }
-\details{This routine cross-validates the species richness based on given species occurences through 
+\details{This routine estimates the species richness for a given distance (without weighted summation) based on given species occurences through 
 	a geometric interpolation model (details in Raedig et al. 2010).
 }
-\value{This function returns a grid which contains the cross-validated 
-	species richness information.}
+\value{This function returns a grid which contains the species richness information for a given distance.}
 \references{Raedig, C., Dorman, C.F., Hildebrandt, A. and Lautenbach, S. (2010). 
 	Reassessing Neotropical angiosperm distribution patterns based on 
 	monographic data: a geometric interpolation approach. Biodivers Conserv, 19, 1523-1546.
@@ -52,9 +53,9 @@
 					dimension, shift, resolution=1)}
 
 ##estimate species richness
-\donttest{species.richness.weighted <- species.richness.cv(dataset.all.species, 
-		landwatermask.nocoast, fold=5, loocv.limit=10, distances=2:10, 
-		weight=0.5, dimension, shift, resolution=1, upperbound=5, 
-		all.species=1:20)}
+\donttest{species.richness.noweight <- species.richness.nonweighted(dataset.all.species, 
+		landwatermask.nocoast, distance=10, dimension, 
+		shift, resolution=1, upperbound=5, narrow.endemic=FALSE, 
+		narrow.endemic.limit=5, all.species=1:20)}
 }
 
