@@ -26,14 +26,14 @@ function(dataset.all.species, landwatermask, distances=1:10, weight=0.5,
 	for (species in all.species){
 		dataset.one.species <- extract.species(dataset.all.species, species)
 		for (distance in distances){
-			species.range.distance[distance,,] <- species.range(dataset.one.species, distance, 
+			species.range.distance[which(distance == distances),,] <- species.range(dataset.one.species, distance, 
 										dimension, shift, resolution, landwatermask, 
 										upperbound)
 			if (distance==1){
 				species.richness.weighted.one.species <- species.range.distance[1,,]
 			} else {
 				species.richness.weighted.one.species <- species.richness.weighted.one.species + 
-				(distance^(-weight) * (species.range.distance[distance,,] - species.range.distance[distance-1,,]))
+				(distance^(-weight) * (species.range.distance[which(distance == distances),,] - species.range.distance[distance-1,,]))
 			}
 		}
 		if (narrow.endemic){

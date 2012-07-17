@@ -4,7 +4,7 @@
 \title{Main Function for species richness estimation}
 \description{The main function to estimate or cross-validate the species richness based on given species occurences.}
 \usage{species.richness.main(dataset.all.species, dataset.landwater, 
-	dataset.height, distance.max=10, weight=0.5, resolution=1,
+	dataset.height, distances=1:10, weight=0.5, resolution=1,
 	narrow.endemic=FALSE, narrow.endemic.limit=5, upperbound=5, 
 	cross.validation=FALSE, fold=5, loocv.limit=10, 
 	create.image=FALSE, image.title="Interpolated Species Richness", 
@@ -27,8 +27,7 @@
 			as 'long' and 'lat' and the height of the cell as 'height'. If the value of 
 			'dataset.height' is 'NULL', the height-information has no effect on the 
 			species richness estimation.}
-  \item{distance.max}{The maximum distance is used to generate a vector of distances (1:distance.max) 
-				which will be used for species range estimation.}
+  \item{distances}{The distances which will be used for species range estimation or cross validation.}
   \item{weight}{The tuning parameter of the weighting procedure (details in Raedig et al. 2010).}
   \item{resolution}{The resolution of the grid in (geographical) degree.}
   \item{narrow.endemic}{A boolean flag that determines if only narrow endemic species 
@@ -87,7 +86,7 @@
 
 ##estimate species richness
 \donttest{species.richness.weighted <- species.richness.main(dataset.all.species, 	
-	    dataset.landwater, dataset.height, distance.max=10, weight=0.5, 
+	    dataset.landwater, dataset.height, distances=1:10, weight=0.5, 
 	    resolution=1, narrow.endemic=FALSE, narrow.endemic.limit=5, 
 	    upperbound=5, cross.validation=FALSE, fold=5, loocv.limit=10, 
 	    create.image=FALSE, directory=getwd(), filename="species.richness.png", 

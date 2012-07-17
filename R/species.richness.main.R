@@ -1,5 +1,5 @@
 species.richness.main <-
-function(dataset.all.species, dataset.landwater, dataset.height, distance.max=10, weight=0.5, 
+function(dataset.all.species, dataset.landwater, dataset.height, distances=1:10, weight=0.5, 
 		resolution=1, narrow.endemic=FALSE, narrow.endemic.limit=5, 
 		upperbound=5, cross.validation=FALSE, fold=5, loocv.limit=10,
 		create.image=FALSE, image.title="Interpolated Species Richness", 
@@ -8,9 +8,6 @@ function(dataset.all.species, dataset.landwater, dataset.height, distance.max=10
 		clusterlimit=100, predefinedClusterlist=NULL, all.species=-1, 
 		export=FALSE, drivername="GTiff", exportname="species.richness.tif", 
 		noninterpolatedgrid=NULL, silent=TRUE){
-
-	#initialize distances
-	distances <- seq(from=1, by=1, to=distance.max)
 
 	#calculating coordinates and dimension of grid
 	if (!silent)

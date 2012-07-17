@@ -54,19 +54,19 @@ function(dataset.all.species, landwatermask, fold=5, loocv.limit=10,
 								shift, resolution, landwatermask, upperbound, cross.validation=TRUE)
 					
 					#sum over all subsamples
-					species.range.all.subs[(distance-1),,] <- species.range.all.subs[(distance-1),,] + species.range.sub
+					species.range.all.subs[which(distance == distances),,] <- species.range.all.subs[which(distance == distances),,] + species.range.sub
 				}
 				
 				#divide through number of subsamples
-				species.range.sub.tmp <- species.range.all.subs[(distance-1),,] / matrix(dim(subsamples)[1],dimension[1],dimension[2])
+				species.range.sub.tmp <- species.range.all.subs[which(distance == distances),,] / matrix(dim(subsamples)[1],dimension[1],dimension[2])
 				species.range.sub.tmp[which(is.na(species.range.sub.tmp)==TRUE)] <- 0
-				species.range.all.subs[(distance-1),,] <- species.range.sub.tmp				
+				species.range.all.subs[which(distance == distances),,] <- species.range.sub.tmp				
 
-				if (distance==2){
+				if (which(distance==distances)==1){
 					species.richness.weighted.one.species <- species.range.all.subs[1,,]
 				} else {
 					species.richness.weighted.one.species <- species.richness.weighted.one.species + 
-						(distance^(-weight) * (species.range.all.subs[(distance-1),,] - species.range.all.subs[(distance-2),,]))
+						(distance^(-weight) * (species.range.all.subs[which(distance == distances),,] - species.range.all.subs[which(distance == distances)-1,,]))
 				}
 			}
 

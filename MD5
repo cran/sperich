@@ -1,4 +1,4 @@
-14781d6d95a13b5d841fe4b56e6d8660 *DESCRIPTION
+a98b882be0e3ed358fd72105b42c302e *DESCRIPTION
 4c2677ccc0679fd22e110262175388cf *NAMESPACE
 f1ae9b5c9ec808515a138af54a342130 *R/add.Data.to.Grid.R
 5ba467979a2daf350bd5d13a2c63a451 *R/add.Edges.R
@@ -17,10 +17,10 @@ a7684b62116cfa7bd2537c1ba72d4e3a *R/generate.subsamples.R
 1e7cfd98aa6fd67ba539da7a867755c5 *R/getDistance.R
 9939b59e28138ef1addd5a999525057a *R/getShift.R
 9a21bc03b12327ccf88ed5fd6e2bb341 *R/searchClusters.R
-dfe429419fe452e32e5d33d36cd5b1ee *R/species.range.R
-b94b886b45f5e8a43a266ff677da7c55 *R/species.richness.CV.R
-b56f343555c191284e6bc032cb571427 *R/species.richness.R
-d88606ad482ebe22a11e0dc535213c84 *R/species.richness.main.R
+dcca3034e241982ac12ba908cede2741 *R/species.range.R
+8a21b027a919497e822371c74c3a2e07 *R/species.richness.CV.R
+5c29d2b7de30918c21c00e986fc97ffb *R/species.richness.R
+7ee59b014b66bfb3a6770a7585f9c2a0 *R/species.richness.main.R
 322f4f714f7d344e917631170e045adb *R/species.richness.nonweighted.R
 e474445337fc1055ddc25dd9734432a2 *data/dataset.all.species.RData
 45df944849780cc3937ff10c68e9b33d *data/dataset.height.RData
@@ -49,5 +49,5 @@ c1a9483e32ce75fe1483a913c97b85a2 *man/getShift.Rd
 b33b495dea3b2517954db38bb5f4d91b *man/species.range.Rd
 519f513317bb8207d5cc189829c5050a *man/species.richness.CV.Rd
 16eee190c68a56b033c89b739d509ec2 *man/species.richness.Rd
-8d53a01a87de88fa5c6a134e428b3506 *man/species.richness.main.Rd
+6ee22313e78d3658070cdcf294a36ad3 *man/species.richness.main.Rd
 0e586dd654b189876b9f41c44a6e2fc0 *man/species.richness.nonweighted.Rd

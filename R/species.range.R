@@ -23,16 +23,18 @@ function(dataset.one.species, distance, dimension, shift,
 
 		for (i in 1:length(points.xy)){
 			point <- points.xy[[i]]
-			neighbour.found <- FALSE
-			for (j in length(points.xy)){
+			neighbour.found <- 0
+			for (j in 1:length(points.xy)){
 				if (i != j){
-					neighbour.found <- ifelse(getDistance(point,points.xy[[j]], resolution) <= distance, TRUE, neighbour.found)
+					if (getDistance(point,points.xy[[j]], resolution) <= distance){
+						neighbour.found <- neighbour.found + 1
+					}
 				}
-				if (neighbour.found){
+				if (neighbour.found >= 2){
 					break
 				}
 			}	
-			if (neighbour.found){
+			if (neighbour.found >= 2){
 				points.valid[[length(points.valid)+1]] <- point
 			}
 	 	}
