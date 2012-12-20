@@ -1,4 +1,4 @@
-add.Data.to.Grid <-
+data.into.Grid <-
 function(dataset.one.species, dimension, shift, resolution=1){
 	#create grid
 	grid <- matrix(0,dimension[1],dimension[2])

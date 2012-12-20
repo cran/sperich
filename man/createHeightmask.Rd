@@ -23,14 +23,14 @@
 
 \examples{
 ##load data
-\donttest{data(dataset.all.species)}
-\donttest{data(dataset.height)}
+data(dataset.all.species)
+data(dataset.height)
 
 ##create grid parameters
-\donttest{dimension <- getDimension(dataset.all.species, resolution=1)}
-\donttest{shift <- getShift(dataset.all.species)}
+dimension <- getDimension(dataset.all.species, resolution=1)
+shift <- getShift(dataset.all.species)
 
 ##create height-matrix
-\donttest{height.matrix <- createHeightmask(dataset.height, dimension, shift, resolution=1)}
+height.matrix <- createHeightmask(dataset.height, dimension, shift, resolution=1)
 }
 

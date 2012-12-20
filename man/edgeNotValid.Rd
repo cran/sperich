@@ -22,40 +22,38 @@
 
 \examples{
 ##load data
-\donttest{data(dataset.all.species)}
-\donttest{data(dataset.landwater)}
+data(dataset.all.species)
+data(dataset.landwater)
 
 ##initialize variables
-\donttest{distance <- 5}
+distance <- 5
 
 ##create grid parameters
-\donttest{dimension <- getDimension(dataset.all.species)}
-\donttest{shift <- getShift(dataset.all.species)}
+dimension <- getDimension(dataset.all.species)
+shift <- getShift(dataset.all.species)
 
 ##create landwatermask
-\donttest{landwatermask.nocoast <- createLandwatermask(dataset.landwater, dimension, shift)}
+landwatermask.nocoast <- createLandwatermask(dataset.landwater, dimension, shift)
 
 ##extract datasets of one species out of database
-\donttest{dataset.one.species <- extract.species(dataset.all.species, 3)}
+dataset.one.species <- extract.species(dataset.all.species, 3)
 
 ##create grid
-\donttest{grid <- matrix(0,dimension[1],dimension[2])}
+grid <- matrix(0,dimension[1],dimension[2])
 
 ##add points
-\donttest{grid <- add.Data.to.Grid(dataset.one.species, dimension, shift)}
+grid <- data.into.Grid(dataset.one.species, dimension, shift)
 
 ##points to list
-\donttest{points <- which(grid > 0)}
-\donttest{points.xy <- list()}
-\donttest{for (i in 1:length(points)){
-		points.xy[[i]] <- c(ifelse((points[i] \%\% dimension[1]) == 0, dimension[1], 
-					points[i] \%\% dimension[1]), 
-					ceiling(points[i]/dimension[1]))
-	}
+points <- which(grid > 0)
+points.xy <- list()
+for (i in 1:length(points)){
+	points.xy[[i]] <- c(ifelse((points[i] \%\% dimension[1]) == 0, dimension[1], 
+			points[i] \%\% dimension[1]), ceiling(points[i]/dimension[1]))
 }
 
 ##Edge-Water-Test
-\donttest{check <- edgeNotValid(grid, points.xy[[1]],points.xy[[2]], 
-				landwatermask.nocoast, 1000)}
-\donttest{print(check)}
+check <- edgeNotValid(grid, points.xy[[1]],points.xy[[2]], 
+			landwatermask.nocoast, 1000)
+print(check)
 }

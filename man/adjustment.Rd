@@ -6,7 +6,7 @@
 \usage{adjustment(species.richness, noninterpolatedgrid, clusterlist)}
 \arguments{
   \item{species.richness}{The grid that should be adjusted. It contains the result of species richness estimation or cross-validation.}
-  \item{noninterpolatedgrid}{A grid containing the species occurences (could be created via function 'createNonInterpolatedGrid').}
+  \item{noninterpolatedgrid}{A grid containing the species occurrences (could be created via function 'createNonInterpolatedGrid').}
   \item{clusterlist}{A list of vectors of pixelpositions (created by 'searchClusters') which are spatial related.}
 }
 \details{This routine adjusts the interpolated species richness for sampling effort 
@@ -21,33 +21,32 @@
 
 \examples{
 ##load data
-\donttest{data(dataset.all.species)}
-\donttest{data(dataset.landwater)}
+data(dataset.all.species)
+data(dataset.landwater)
 
 ##create grid parameters
-\donttest{dimension <- getDimension(dataset.all.species, resolution=1)}
-\donttest{shift <- getShift(dataset.all.species)}
+dimension <- getDimension(dataset.all.species, resolution=1)
+shift <- getShift(dataset.all.species)
 
 ##create landwatermask
-\donttest{landwatermask.nocoast <- createLandwatermask(dataset.landwater, 
-					dimension, shift, resolution=1)}
+landwatermask.nocoast <- createLandwatermask(dataset.landwater, 
+					dimension, shift, resolution=1)
 
 ##estimate species richness
-\donttest{species.richness.weighted <- species.richness(dataset.all.species, 
-		landwatermask.nocoast, distances=1:10, weight=0.5, dimension, shift, resolution=1,
-		upperbound=5, narrow.endemic=FALSE, narrow.endemic.limit=5, 
-		all.species=1:20)}
+species.richness.weighted <- species.richness(dataset.all.species, 
+		landwatermask.nocoast, distances=1:5, weight=0.5, dimension, shift, resolution=1,
+		upperbound=5, all.species=1:2)
 
 ##prepare adjustment
-\donttest{noninterpolatedgrid <- createNonInterpolatedGrid(dataset.all.species, 
-				dimension, shift, resolution=1, all.species=-1)}
-\donttest{clusterlimit <- 100}
+noninterpolatedgrid <- createNonInterpolatedGrid(dataset.all.species, 
+				dimension, shift, resolution=1, all.species=-1)
+clusterlimit <- 100
 
-\donttest{clusterlist <- searchClusters(species.richness.weighted, 
-		dimension, shift, resolution=1, clusterlimit)}
+clusterlist <- searchClusters(species.richness.weighted, 
+		dimension, shift, resolution=1, clusterlimit)
 
 ##adjust species richness
-\donttest{species.richness.weighted.adjusted <- adjustment(species.richness.weighted, 
-		noninterpolatedgrid, clusterlist)}
+species.richness.weighted.adjusted <- adjustment(species.richness.weighted, 
+		noninterpolatedgrid, clusterlist)
 }
 

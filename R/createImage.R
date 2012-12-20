@@ -1,7 +1,14 @@
 createImage <-
 function(grid, landwatermask, image.title, directory, filename, shift, parts=10, resolution=1){
-	require(lattice)
-	require(RColorBrewer)
+	lattice.avail <- suppressMessages(require(lattice, quietly=TRUE))
+	if (!lattice.avail){
+		stop("Package lattice not available!")
+	}
+	
+	rcolorbrewer.avail <- suppressMessages(require(RColorBrewer, quietly=TRUE))
+	if (!rcolorbrewer.avail){
+		stop("Package RColorBrewer not available!")
+	}
 
 	if ((dim(grid)[1] != dim(landwatermask)[1])||(dim(grid)[2] != dim(landwatermask)[2])){
 		return(FALSE)

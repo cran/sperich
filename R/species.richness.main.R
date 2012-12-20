@@ -7,7 +7,7 @@ function(dataset.all.species, dataset.landwater, dataset.height, distances=1:10,
 		evaluation=FALSE, eval.title="Histogramm", adjust=FALSE, 
 		clusterlimit=100, predefinedClusterlist=NULL, all.species=-1, 
 		export=FALSE, drivername="GTiff", exportname="species.richness.tif", 
-		noninterpolatedgrid=NULL, silent=TRUE){
+		noninterpolatedgrid=NULL, silent=TRUE, do.parallel=FALSE){
 
 	#calculating coordinates and dimension of grid
 	if (!silent)
@@ -34,20 +34,30 @@ function(dataset.all.species, dataset.landwater, dataset.height, distances=1:10,
 	height.matrix[which(height.matrix < 0)] <- 0
 	landwatermask[which(landwatermask >= 0)] <- height.matrix[which(landwatermask >= 0)]
 
+	if (narrow.endemic){
+		if (!silent)
+			cat("Extracting narrow endemic species.. ",sep="")
+		# search narrow endemic species out of dataset
+		all.species <- getNarrowEndemics(dataset.all.species, all.species, 
+							narrow.endemic.limit, dimension, shift, 
+							resolution)
+		if (!silent)	
+			cat("Done!\n")
+	}
+
 	if (cross.validation){
 		if (!silent)
 			cat("Calculating cross-validated species richness.. \n")
 		species.richness.weighted <- species.richness.cv(dataset.all.species, landwatermask, fold, 
 									loocv.limit, distances, weight, dimension, 
 									shift, resolution, upperbound,  all.species, 
-									silent)
+									silent, do.parallel)
 	} else {
 		if (!silent)
 			cat("Calculating species richness.. \n")
 		species.richness.weighted <- species.richness(dataset.all.species, landwatermask, distances, 
 									weight, dimension, shift, resolution,
-									upperbound, narrow.endemic, narrow.endemic.limit, 
-									all.species, silent)
+									upperbound, all.species, silent, do.parallel)
 	}
 
 	if (adjust){

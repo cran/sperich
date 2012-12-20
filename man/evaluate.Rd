@@ -20,7 +20,7 @@
 	\item{filename}{The name of the created png-file.}
 }
 \details{This routine evaluates the result grids of a species richness estimation (details in Raedig et al. 2010).
-	It creates one or two histogramms (depending on input) of the species occurences with additional information about the 
+	It creates one or two histogramms (depending on input) of the species occurrences with additional information about the 
 	total number of species of the grid and other statistic scores. 
 	It is possible to create on png-file for every result grid or to compare two result-grids in one png-file, 
 	depending on how many grids are defined as input.
@@ -34,23 +34,23 @@
 
 \examples{
 #load data
-\donttest{data(dataset.all.species)}
-\donttest{data(dataset.landwater)}
+data(dataset.all.species)
+data(dataset.landwater)
 
 #create grid parameters
-\donttest{dimension <- getDimension(dataset.all.species, resolution=1)}
-\donttest{shift <- getShift(dataset.all.species)}
+dimension <- getDimension(dataset.all.species, resolution=1)
+shift <- getShift(dataset.all.species)
 
 #create landwatermask
-\donttest{landwatermask.nocoast <- createLandwatermask(dataset.landwater,
-dimension, shift, resolution=1)}
+landwatermask.nocoast <- createLandwatermask(dataset.landwater,
+dimension, shift, resolution=1)
 
 #estimate species richness
-\donttest{species.richness.weighted <- species.richness(dataset.all.species,
-landwatermask.nocoast, distances=1:10, weight=0.5, dimension,
-shift, resolution=1, upperbound=3000, all.species=1:20)}
+species.richness.weighted <- species.richness(dataset.all.species,
+landwatermask.nocoast, distances=1:5, weight=0.5, dimension,
+shift, resolution=1, upperbound=3000, all.species=1:2)
 
 #evaluation
-\donttest{evaluate(species.richness.weighted, NULL, title.one="Histogramm 1")}
+evaluate(species.richness.weighted, NULL, title.one="Histogramm 1")
 }
 

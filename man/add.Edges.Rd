@@ -16,12 +16,12 @@
 
 \examples{
 ##initialize data
-\donttest{m <- matrix(0,10,10)}
-\donttest{point.a <- c(5,8)}
-\donttest{point.b <- c(10,3)}
+m <- matrix(0,10,10)
+point.a <- c(5,8)
+point.b <- c(10,3)
 
 ##calculate the distance of the two points
-\donttest{m <- add.Edges(m,point.a,point.b)}
-\donttest{image(m)}
+m <- add.Edges(m,point.a,point.b)
+image(m)
 }
 

@@ -1,24 +1,24 @@
 generate.subsamples <-
-function(number.of.occurences, fold, loocv.limit){
+function(number.of.occurrences, fold, loocv.limit){
 
-	if (number.of.occurences < loocv.limit){
+	if (number.of.occurrences < loocv.limit){
 		#loocv
-		subsamples <- matrix(0,number.of.occurences, number.of.occurences-1)
-		for (i in 1:number.of.occurences){
-			if ((i > 1)&&(i < number.of.occurences)){
-				subsamples[i,] <- c(1:(i-1),(i+1):number.of.occurences)
+		subsamples <- matrix(0,number.of.occurrences, number.of.occurrences-1)
+		for (i in 1:number.of.occurrences){
+			if ((i > 1)&&(i < number.of.occurrences)){
+				subsamples[i,] <- c(1:(i-1),(i+1):number.of.occurrences)
 			}
 			if (i==1){
-				subsamples[i,] <- (i+1):number.of.occurences
+				subsamples[i,] <- (i+1):number.of.occurrences
 			}
-			if (i == number.of.occurences){
-				subsamples[i,] <- 1:(number.of.occurences-1)
+			if (i == number.of.occurrences){
+				subsamples[i,] <- 1:(number.of.occurrences-1)
 			}
 		}
 	} else {
 		#x-fold cross validation
-		members <- 1:number.of.occurences
-		number.of.members <- ceiling(number.of.occurences/fold)
+		members <- 1:number.of.occurrences
+		number.of.members <- ceiling(number.of.occurrences/fold)
 		groups <- matrix(0, fold, number.of.members)
 
 		for (i in 1:fold){

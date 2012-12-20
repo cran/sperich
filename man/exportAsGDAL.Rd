@@ -19,24 +19,24 @@
 
 \examples{
 ##load data
-\donttest{data(dataset.all.species)}
-\donttest{data(dataset.landwater)}
+data(dataset.all.species)
+data(dataset.landwater)
 
 ##create grid parameters
-\donttest{dimension <- getDimension(dataset.all.species, resolution=1)}
-\donttest{shift <- getShift(dataset.all.species)}
+dimension <- getDimension(dataset.all.species, resolution=1)
+shift <- getShift(dataset.all.species)
 
 ##create landwatermask
-\donttest{landwatermask.nocoast <- createLandwatermask(dataset.landwater, 
-						dimension, shift, resolution=1)}
+landwatermask.nocoast <- createLandwatermask(dataset.landwater, 
+						dimension, shift, resolution=1)
 
 ##estimate species richness
-\donttest{species.richness.weighted <- species.richness(dataset.all.species,
-landwatermask.nocoast, distances=1:10, weight=0.5, dimension,
-shift, resolution=1, upperbound=3000, all.species=1:20)}
+species.richness.weighted <- species.richness(dataset.all.species,
+	landwatermask.nocoast, distances=1:5, weight=0.5, dimension,
+	shift, resolution=1, upperbound=3000, all.species=1:2)
 
 ##export
-\donttest{exportAsGDAL(species.richness.weighted, shift, resolution=1, 
-	    directory=getwd(), filename="species.richness.tif", drivername="GTiff")}
+exportAsGDAL(species.richness.weighted, shift, resolution=1, 
+	    directory=getwd(), filename="species.richness.tif", drivername="GTiff")
 }
 

@@ -20,17 +20,17 @@
 
 \examples{
 ##initialize data
-\donttest{m <- matrix(0,10,10)}
-\donttest{m[2:8,2] <- 1}
-\donttest{m[2:8,8] <- 1}
-\donttest{m[2,2:8] <- 1}
-\donttest{m[8,2:8] <- 1}
+m <- matrix(0,10,10)
+m[2:8,2] <- 1
+m[2:8,8] <- 1
+m[2,2:8] <- 1
+m[8,2:8] <- 1
 
 ##initialize mask (in this case: empty mask)
-\donttest{mask <- matrix(0,10,10)}
+mask <- matrix(0,10,10)
 
 ##calculate the distance of the two points
-\donttest{m <- fill.Areas(m, mask)}
-\donttest{image(m)}
+m <- fill.Areas(m, mask)
+image(m)
 }
 

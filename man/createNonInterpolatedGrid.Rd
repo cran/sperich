@@ -1,14 +1,14 @@
 \name{createNonInterpolatedGrid}
 \alias{createNonInterpolatedGrid}
 
-\title{Create a Species Occurences Grid with no interpolation}
-\description{This routine creates a grid containing the species occurences.}
+\title{Create a species occurrences grid with no interpolation}
+\description{This routine creates a grid containing the species occurrences.}
 \usage{createNonInterpolatedGrid(dataset.all.species, dimension, 
 			shift, resolution=1, all.species=-1)}
 \arguments{
   \item{dataset.all.species}{A dataset containing all observed species with their ID 
 			(named: speciesID) and the longitude (named: long) and 
-			latitude (named: lat) of their occurence location.}
+			latitude (named: lat) of their occurrence location.}
   \item{dimension}{The dimension of the processed grid.}
   \item{shift}{The geographic coordinates of the origin of the grid.}
   \item{resolution}{The resolution of the grid in (geographical) degree.}
@@ -18,7 +18,7 @@
 
 \details{This routine creates a grid and adds all species mentioned in 'all.species' to it.}
 
-\value{A grid containing the species occurences without interpolation.}
+\value{A grid containing the species occurrences without interpolation.}
 
 \references{Raedig, C., Dorman, C.F., Hildebrandt, A. and Lautenbach, S. (2010). 
 	Reassessing Neotropical angiosperm distribution patterns based on 
@@ -28,17 +28,17 @@
 
 \examples{
 ##load data
-\donttest{data(dataset.all.species)}
-\donttest{data(dataset.landwater)}
+data(dataset.all.species)
+data(dataset.landwater)
 
 ##create grid parameters
-\donttest{dimension <- getDimension(dataset.all.species, resolution=1)}
-\donttest{shift <- getShift(dataset.all.species)}
-\donttest{resolution <- 1}
-\donttest{all.species <- -1}
+dimension <- getDimension(dataset.all.species, resolution=1)
+shift <- getShift(dataset.all.species)
+resolution <- 1
+all.species <- -1
 
-##estimate species richness
-\donttest{species.occurences <- createNonInterpolatedGrid(dataset.all.species, 
-				dimension, shift, resolution, all.species)}
+##create grid containing species occurrences
+species.occurrences <- createNonInterpolatedGrid(dataset.all.species, 
+				dimension, shift, resolution, all.species)
 }
 

@@ -1,7 +1,13 @@
 searchClusters <-
 function(species.richness, dimension, shift, resolution, clusterlimit){
-	require(SDMTools)
-
+	sdmtools.avail <- suppressMessages(require(SDMTools, quietly=TRUE))
+	if (!sdmtools.avail){
+		stop("Package SDMTools not available!")
+	}
+	rgdal.avail <- suppressMessages(require(rgdal, quietly=TRUE))
+	if (!rgdal.avail){
+		stop("Package rgdal not available!")
+	}
 	#create a binary matrix out of species.richness
 	grid <- matrix(0, dimension[1], dimension[2])
 	#fill binary matrix
@@ -28,7 +34,7 @@ function(species.richness, dimension, shift, resolution, clusterlimit){
 	result.sgdf <- as(result.spdf, "SpatialGridDataFrame")
 	
 	#start clustering
-	cluster <- ConnCompLabel(result.sgdf)
+	cluster <- SDMTools::ConnCompLabel(result.sgdf)
 
 	#convert dataframe to matrix
 	clustermatrix <- as.matrix(cluster)
@@ -37,7 +43,7 @@ function(species.richness, dimension, shift, resolution, clusterlimit){
 
 	#create list for clusters
 	clusterlist <- list()	
-	
+
 	#fill list with clusters
 	if (max(clustermatrix)==0){
 		clusterlist[[1]] <- which(clustermatrix==0)
@@ -46,6 +52,5 @@ function(species.richness, dimension, shift, resolution, clusterlimit){
 			clusterlist[[length(clusterlist)+1]] <- which(clustermatrix==i)
 		}
 	}
-		
 	return(clusterlist)
 }

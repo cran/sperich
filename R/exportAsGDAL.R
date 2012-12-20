@@ -1,6 +1,9 @@
 exportAsGDAL <- 
 function(grid, shift, resolution, directory=getwd(), filename="grid.tif", drivername="GTiff"){
-	require(rgdal)
+	rgdal.avail <- suppressMessages(require(rgdal, quietly=TRUE))
+	if (!rgdal.avail){
+		stop("Package rgdal not available!")
+	}
 
 	#check directory
 	direc <- unlist(strsplit(directory,""))

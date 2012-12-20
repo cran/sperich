@@ -7,7 +7,7 @@
 \arguments{
   \item{dataset.all.species}{A dataset containing all observed species with their ID 
 			(named: speciesID) and the longitude (named: long) and 
-			latitude (named: lat) of their occurence location.}
+			latitude (named: lat) of their occurrence location.}
 }
 \details{This function calculates the coordinates of the origin of the grid which 
 	should be used for a species richness estimation.
@@ -18,10 +18,10 @@
 
 \examples{
 ##load data
-\donttest{data(dataset.all.species)}
+data(dataset.all.species)
 
 #extract coordinates of origin out of database
-\donttest{shift <- getShift(dataset.all.species)}
-\donttest{print(shift)}
+shift <- getShift(dataset.all.species)
+print(shift)
 }
 

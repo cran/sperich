@@ -16,11 +16,11 @@
 
 \examples{
 ##initialize data
-\donttest{point.a <- c(5,8)}
-\donttest{point.b <- c(10,3)}
+point.a <- c(5,8)
+point.b <- c(10,3)
 
 ##calculate the distance of the two points
-\donttest{distance <- getDistance(point.a,point.b, resolution=1)}
-\donttest{print(distance)}
+distance <- getDistance(point.a,point.b, resolution=1)
+print(distance)
 }
 
