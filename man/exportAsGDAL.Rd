@@ -3,7 +3,8 @@
 
 \title{Export result grid as GDAL grid map}
 \description{This function exports the result grid as a GDAL grid map.}
-\usage{exportAsGDAL(grid, shift, resolution, directory=getwd(), filename="grid.tif", drivername="GTiff")}
+\usage{exportAsGDAL(grid, shift, resolution, directory=getwd(), 
+		filename="grid.tif", drivername="GTiff")}
 \arguments{
   \item{grid}{The grid that should be exported.}
   \item{shift}{The geographic coordinates of the origin of the grid.}

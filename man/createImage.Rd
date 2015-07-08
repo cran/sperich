@@ -41,13 +41,15 @@ landwatermask.nocoast <- createLandwatermask(dataset.landwater,
 
 ##estimate species richness
 species.richness.weighted <- species.richness(dataset.all.species, 
-						landwatermask.nocoast, distances=1:5, weight=0.5, dimension, 
-						shift, resolution=1, upperbound=3000, all.species=1:2)
+	landwatermask.nocoast, distances=1:5, weight=0.5, dimension, 
+	shift, resolution=1, upperbound=3000, all.species=1:2)
 
 ##create image
+\dontrun{
 image.success <- createImage(species.richness.weighted, landwatermask.nocoast, 
 	    image.title="Test", directory=getwd(), filename="species.richness.test01.png", 
 	    shift, parts=10, resolution=1)
 print(image.success)
+}
 }
 

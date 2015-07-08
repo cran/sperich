@@ -1,9 +1,6 @@
 exportAsGDAL <- 
 function(grid, shift, resolution, directory=getwd(), filename="grid.tif", drivername="GTiff"){
-	rgdal.avail <- suppressMessages(require(rgdal, quietly=TRUE))
-	if (!rgdal.avail){
-		stop("Package rgdal not available!")
-	}
+	requireNamespace("rgdal")
 
 	#check directory
 	direc <- unlist(strsplit(directory,""))
@@ -30,10 +27,10 @@ function(grid, shift, resolution, directory=getwd(), filename="grid.tif", driver
 		}
 	}
 	result <- data.frame(values=values)
-	coordinates(result) <- data.frame(long=long, lat=lat)
-
-	result.spatial <- as(result, "SpatialPixelsDataFrame")	
+	points <- sp::SpatialPoints(data.frame(long=long, lat=lat), proj4string=sp::CRS("+proj=longlat +datum=WGS84"))
+	#create SpatialGridDataFrame 
+	result.spatial <- sp::SpatialPixelsDataFrame(points, result)	
 	result.gdal <- as(result.spatial, "SpatialGridDataFrame")	
 
-	writeGDAL(result.gdal, fname=paste(directory,filename, sep=""), drivername=drivername)
+	rgdal::writeGDAL(result.gdal, fname=paste(directory,filename, sep=""), drivername=drivername)
 }

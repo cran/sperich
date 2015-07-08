@@ -25,16 +25,16 @@ function(dataset.all.species, landwatermask, fold=5, loocv.limit=10,
 	species.richness.weighted.cv <- matrix(0,dimension[1],dimension[2])
 
 	#iterate parallel about all species
-	foreach.avail <- suppressMessages(require(foreach, quietly=TRUE))
-	if ((foreach.avail)&&(do.parallel)){
-		if(!foreach:::getDoParRegistered()) {
+	requireNamespace("foreach")
+	if (do.parallel){
+		if(!foreach::getDoParRegistered()) {
 			if (!silent) {cat("No parallel backend detected! Problem will be solved sequential.\n",sep="")}
-			foreach:::registerDoSEQ()
+			foreach::registerDoSEQ()
 		} else {
 			if (!silent) {cat("Parallel backend detected.\n",sep="")}
 		}
 
-		species.richness.weighted.cv <- foreach(species=all.species, .combine="+", .inorder=FALSE) %dopar% {
+		species.richness.weighted.cv <- foreach::foreach(species=all.species, .combine="+", .inorder=FALSE) %dopar% {
 			#create grid
 			species.richness.weighted.one.species <- matrix(0,dimension[1],dimension[2])
 			

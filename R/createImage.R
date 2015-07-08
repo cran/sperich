@@ -1,19 +1,9 @@
 createImage <-
 function(grid, landwatermask, image.title, directory, filename, shift, parts=10, resolution=1){
-	lattice.avail <- suppressMessages(require(lattice, quietly=TRUE))
-	if (!lattice.avail){
-		stop("Package lattice not available!")
-	}
-	
-	rcolorbrewer.avail <- suppressMessages(require(RColorBrewer, quietly=TRUE))
-	if (!rcolorbrewer.avail){
-		stop("Package RColorBrewer not available!")
-	}
-
 	if ((dim(grid)[1] != dim(landwatermask)[1])||(dim(grid)[2] != dim(landwatermask)[2])){
 		return(FALSE)
 	}
-	
+
 	#check directory
 	direc <- unlist(strsplit(directory,""))
 	if (direc[length(direc)] != "/"){
@@ -58,15 +48,15 @@ function(grid, landwatermask, image.title, directory, filename, shift, parts=10,
 	
 	#create colors
 	if ((parts > 2) && (parts < 12)) {
-		colors <- brewer.pal(n=parts, name="PuOr")
+		colors <- RColorBrewer::brewer.pal(n=parts, name="PuOr")
 	} else {
 		colors <- rainbow(parts)
 	}
 
 	#create levelplot
 	png(filename=paste(directory,filename,sep=""), width=2000, height=2000, res=100)
-	trellis.par.set(fontsize=list(text=25,points=8))
-	picture <- levelplot(data$richness ~ data$x + data$y, data, at=c(-2,-1,breaks), contour=FALSE, 
+	lattice::trellis.par.set(fontsize=list(text=25,points=8))
+	picture <- lattice::levelplot(data$richness ~ data$x + data$y, data, at=c(-2,-1,breaks), contour=FALSE, 
 			col.regions=c("lightgray","gray",colors), 
 			xlab="Longitude",ylab="Latitude", main=image.title,
 			colorkey=list(at=breaks, col=colors,

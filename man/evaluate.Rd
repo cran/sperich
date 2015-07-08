@@ -51,6 +51,8 @@ landwatermask.nocoast, distances=1:5, weight=0.5, dimension,
 shift, resolution=1, upperbound=3000, all.species=1:2)
 
 #evaluation
+\dontrun{
 evaluate(species.richness.weighted, NULL, title.one="Histogramm 1")
+}
 }
 

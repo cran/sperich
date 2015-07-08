@@ -25,18 +25,18 @@ function(dataset.all.species, landwatermask, distances=2:10, weight=0.5,
 	species.richness.weighted <- matrix(0, dimension[1], dimension[2])
 	species.range.distance <- array(0, dim=c(length(distances),dimension[1], dimension[2]))
 
-	foreach.avail <- suppressMessages(require(foreach, quietly=TRUE))
-	if ((foreach.avail)&&(do.parallel)){
+	requireNamespace("foreach")
+	if (do.parallel){
 		# check if parallel backend is available
-		if(!foreach:::getDoParRegistered()) {
+		if(!foreach::getDoParRegistered()) {
 			if (!silent) {cat("No parallel backend detected! Problem will be solved sequential.\n",sep="")}
-			foreach:::registerDoSEQ()
+			foreach::registerDoSEQ()
 		} else {
 			if (!silent) {cat("Parallel backend detected.\n",sep="")}
 		}
 
 		# iterate parallel or sequential with foreach-loop
-		species.richness.weighted <- foreach(species=all.species, .combine="+", .inorder=FALSE) %dopar% {
+		species.richness.weighted <- foreach::foreach(species=all.species, .combine="+", .inorder=FALSE) %dopar% {
 			# create species grid
 			species.richness.weighted.one.species <- matrix(0, dimension[1], dimension[2])
 			# extract species
