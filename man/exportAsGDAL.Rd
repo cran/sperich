@@ -37,7 +37,9 @@ species.richness.weighted <- species.richness(dataset.all.species,
 	shift, resolution=1, upperbound=3000, all.species=1:2)
 
 ##export
+\dontrun{ 
 exportAsGDAL(species.richness.weighted, shift, resolution=1, 
 	    directory=getwd(), filename="species.richness.tif", drivername="GTiff")
+}
 }
 

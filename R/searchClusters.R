@@ -1,6 +1,5 @@
 searchClusters <-
 function(species.richness, dimension, shift, resolution, clusterlimit){
-	requireNamespace("SDMTools")
 	requireNamespace("sp")
 
 	#create a binary matrix out of species.richness
@@ -27,13 +26,10 @@ function(species.richness, dimension, shift, resolution, clusterlimit){
 	result.spdf <- sp::SpatialPixelsDataFrame(points, result)
 	result.sgdf <- as(result.spdf, "SpatialGridDataFrame")	
 
-	#start clustering
-	cluster <- SDMTools::ConnCompLabel(result.sgdf)
-
-	#convert dataframe to matrix
-	clustermatrix <- as.matrix(cluster)
+	# connected component labeling
+	clustermatrix <- cclFun(as.matrix(result.sgdf))
 	#adjust matrix
-	clustermatrix <- t(clustermatrix)[dim(t(clustermatrix))[1]:1,]	
+	clustermatrix <- t(clustermatrix)[dim(t(clustermatrix))[1]:1,]
 
 	#create list for clusters
 	clusterlist <- list()	

@@ -5,7 +5,6 @@
 \description{
 This data set gives an example of angiosperm species and their occurrence in southern america.
 }
-\usage{dataset.all.species}
 \format{A dataframe containing the longitude and lattitude of the occurrence location as 'long' and 'lat' and the species ID as 'speciesID'.}
 \source{Angiosperm Database}
 \references{
