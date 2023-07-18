@@ -1,6 +1,6 @@
 species.richness.nonweighted <- 
 function(dataset.all.species, landwatermask, distance=10, 
-		dimension, shift, resolution=1, upperbound, 
+		dimension, origin, resolution=1, upperbound, 
 		all.species=-1, silent=TRUE, do.parallel=FALSE){
 	if (all.species[1]==-1){
 		all.species <- unique(dataset.all.species$speciesID)
@@ -31,7 +31,7 @@ function(dataset.all.species, landwatermask, distance=10,
 		species.richness.noweight <- foreach::foreach(species=all.species, .combine="+", .inorder=FALSE) %dopar% {
 			dataset.one.species <- extract.species(dataset.all.species, species)
 			species.range.d <- species.range(dataset.one.species, distance, 
-						dimension, shift, resolution, landwatermask, 
+						dimension, origin, resolution, landwatermask, 
 						upperbound)
 			if (!silent){
 				cat(rep("\b", nchar(message)),sep="")
@@ -45,7 +45,7 @@ function(dataset.all.species, landwatermask, distance=10,
 		for (species in all.species){
 			dataset.one.species <- extract.species(dataset.all.species, species)
 			species.range.d <- species.range(dataset.one.species, distance, 
-						dimension, shift, resolution, landwatermask, 
+						dimension, origin, resolution, landwatermask, 
 						upperbound)
 			#sum over all species
 			species.richness.noweight <- species.richness.noweight + species.range.d
@@ -65,3 +65,4 @@ function(dataset.all.species, landwatermask, distance=10,
 
 	return(species.richness.noweight)
 }
+

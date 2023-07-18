@@ -115,3 +115,4 @@ function(result.grid.one, result.grid.two, title.one="Histogramm of species rich
 		return(TRUE)
 	}
 }
+

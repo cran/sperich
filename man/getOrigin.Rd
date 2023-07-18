@@ -1,9 +1,9 @@
-\name{getShift}
-\alias{getShift}
+\name{getOrigin}
+\alias{getOrigin}
 
 \title{Origin Koordinates}
 \description{This function calculates the origin of the grid used for a species richness estimation.}
-\usage{getShift(dataset.all.species)}
+\usage{getOrigin(dataset.all.species)}
 \arguments{
   \item{dataset.all.species}{A dataset containing all observed species with their ID 
 			(named: speciesID) and the longitude (named: long) and 
@@ -21,7 +21,7 @@
 data(dataset.all.species)
 
 #extract coordinates of origin out of database
-shift <- getShift(dataset.all.species)
-print(shift)
+origin <- getOrigin(dataset.all.species)
+print(origin)
 }
 

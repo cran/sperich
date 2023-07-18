@@ -30,10 +30,10 @@ distance <- 5
 
 ##create grid parameters
 dimension <- getDimension(dataset.all.species)
-shift <- getShift(dataset.all.species)
+origin <- getOrigin(dataset.all.species)
 
 ##create landwatermask
-landwatermask.nocoast <- createLandwatermask(dataset.landwater, dimension, shift)
+landwatermask.nocoast <- createLandwatermask(dataset.landwater, dimension, origin)
 
 ##extract datasets of one species out of database
 dataset.one.species <- extract.species(dataset.all.species, 3)
@@ -42,7 +42,7 @@ dataset.one.species <- extract.species(dataset.all.species, 3)
 grid <- matrix(0,dimension[1],dimension[2])
 
 ##add points
-grid <- data.into.Grid(dataset.one.species, dimension, shift)
+grid <- data.into.Grid(dataset.one.species, dimension, origin)
 
 ##points to list
 points <- which(grid > 0)

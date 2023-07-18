@@ -14,3 +14,4 @@ function(dataset.all.species, resolution=1){
 	
 	return(c(max(long) + 1,max(lat)+1))
 }
+

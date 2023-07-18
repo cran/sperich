@@ -1,5 +1,5 @@
 createLandwatermask <-
-function(dataset.landwater,dimension, shift, resolution=1){
+function(dataset.landwater, dimension, origin, resolution=1){
 	#create grid
 	landwatermask.nocoast <- matrix(0,dimension[1],dimension[2])
 
@@ -10,9 +10,9 @@ function(dataset.landwater,dimension, shift, resolution=1){
 		lat <- dataset.landwater$lat
 		landsum <- dataset.landwater$landsum
 
-		#shift coordinates to origin
-		long <- long - shift[1]
-		lat <- lat - shift[2]
+		#origin coordinates to origin
+		long <- long - origin[1]
+		lat <- lat - origin[2]
 
 		#transformate coordinates to grid position
 		long <- round(long / resolution) 
@@ -28,3 +28,4 @@ function(dataset.landwater,dimension, shift, resolution=1){
 
 	return(landwatermask.nocoast)
 }
+

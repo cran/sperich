@@ -1,5 +1,5 @@
 searchClusters <-
-function(species.richness, dimension, shift, resolution, clusterlimit){
+function(species.richness, dimension, origin, resolution, clusterlimit){
 	requireNamespace("sp")
 
 	#create a binary matrix out of species.richness
@@ -15,8 +15,8 @@ function(species.richness, dimension, shift, resolution, clusterlimit){
 	for (m in 1:dimension[1]){
 		for ( n in 1:dimension[2]){
 			values[count] <- grid[m,n]
-			long[count] <- shift[1] + resolution*n
-			lat[count] <- shift[2] + resolution*m
+			long[count] <- origin[1] + resolution*n
+			lat[count] <- origin[2] + resolution*m
 			count <- count + 1
 		}
 	}
@@ -44,3 +44,4 @@ function(species.richness, dimension, shift, resolution, clusterlimit){
 	}
 	return(clusterlist)
 }
+

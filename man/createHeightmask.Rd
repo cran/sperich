@@ -3,14 +3,14 @@
 
 \title{Height-Mask Creation}
 \description{This function creates a height-mask as a grid based on given dimension and coordinates.}
-\usage{createHeightmask(dataset.height, dimension, shift, resolution=1)}
+\usage{createHeightmask(dataset.height, dimension, origin, resolution=1)}
 \arguments{
   \item{dataset.height}{A dataframe containing the longitude and lattitude of the grid 
 			cell location as 'long' and 'lat' and the height of the cell as 'height'.
 			If the value of 'dataset.height' is 'NULL', the returned grid contains 0 as 
 			height-information of every cell.}
   \item{dimension}{The dimension of the processed grid.}
-  \item{shift}{The geographic coordinates of the origin of the grid.}
+  \item{origin}{The geographic coordinates of the origin of the grid.}
   \item{resolution}{The resolution of the grid in (geographical) degree.}
 }
 \details{This routine creates a height-mask as a grid. As Input a 
@@ -28,9 +28,9 @@ data(dataset.height)
 
 ##create grid parameters
 dimension <- getDimension(dataset.all.species, resolution=1)
-shift <- getShift(dataset.all.species)
+origin <- getOrigin(dataset.all.species)
 
 ##create height-matrix
-height.matrix <- createHeightmask(dataset.height, dimension, shift, resolution=1)
+height.matrix <- createHeightmask(dataset.height, dimension, origin, resolution=1)
 }
 

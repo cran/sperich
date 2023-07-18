@@ -3,7 +3,7 @@
 
 \title{Land-Water-Mask Creation}
 \description{This function creates a land-water-mask as a grid based on given dimension and coordinates.}
-\usage{createLandwatermask(dataset.landwater, dimension, shift, resolution=1)}
+\usage{createLandwatermask(dataset.landwater, dimension, origin, resolution=1)}
 \arguments{
   \item{dataset.landwater}{A dataset containing the percentage of land on 
 			a cell of a grid. The coordinates of the cell should be given as 
@@ -11,7 +11,7 @@
 			of land shoud be named landsum. If the value of 'dataset.landwater' 
 			is 'NULL', a grid containing only land-cells will be created.}
   \item{dimension}{The dimension of the processed grid.}
-  \item{shift}{The geographic coordinates of the origin of the grid.}
+  \item{origin}{The geographic coordinates of the origin of the grid.}
   \item{resolution}{The resolution of the grid in (geographical) degree.}
 }
 \details{This routine creates a land-water-mask as a grid. As Input a 
@@ -30,10 +30,10 @@ data(dataset.landwater)
 
 ##create grid parameters
 dimension <- getDimension(dataset.all.species, resolution=1)
-shift <- getShift(dataset.all.species)
+origin <- getOrigin(dataset.all.species)
 
 ##create landwatermask
 landwatermask.nocoast <- createLandwatermask(dataset.landwater, 
-					dimension, shift, resolution=1)
+					dimension, origin, resolution=1)
 }
 

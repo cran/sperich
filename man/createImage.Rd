@@ -4,7 +4,7 @@
 \title{Image Creation}
 \description{This function creates a levelplot of the result-grid of species range estimation and saves it as a PNG-File.}
 \usage{createImage(grid, landwatermask, image.title, 
-			directory, filename, shift, 
+			directory, filename, origin, 
 			parts=10, resolution=1)}
 \arguments{
   \item{grid}{The grid that should be plotted. It contains the weighted species richness information.}
@@ -14,7 +14,7 @@
   \item{image.title}{The heading of the created image.}
   \item{directory}{The directory in which the image should be stored.}
   \item{filename}{The filename of the created PNG-File.}
-  \item{shift}{The geographic coordinates of the origin of the grid.}
+  \item{origin}{The geographic coordinates of the origin of the grid.}
   \item{parts}{An Integer value determining the number of divisions in the colorkey of the created image.}
   \item{resolution}{The resolution of the grid in (geographical) degree.}
 }
@@ -33,22 +33,22 @@ data(dataset.landwater)
 
 ##create grid parameters
 dimension <- getDimension(dataset.all.species, resolution=1)
-shift <- getShift(dataset.all.species)
+origin <- getOrigin(dataset.all.species)
 
 ##create landwatermask
 landwatermask.nocoast <- createLandwatermask(dataset.landwater, 
-						dimension, shift, resolution=1)
+						dimension, origin, resolution=1)
 
 ##estimate species richness
 species.richness.weighted <- species.richness(dataset.all.species, 
 	landwatermask.nocoast, distances=1:5, weight=0.5, dimension, 
-	shift, resolution=1, upperbound=3000, all.species=1:2)
+	origin, resolution=1, upperbound=3000, all.species=1:2)
 
 ##create image
 \dontrun{
 image.success <- createImage(species.richness.weighted, landwatermask.nocoast, 
 	    image.title="Test", directory=getwd(), filename="species.richness.test01.png", 
-	    shift, parts=10, resolution=1)
+	    origin, parts=10, resolution=1)
 print(image.success)
 }
 }

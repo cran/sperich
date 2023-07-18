@@ -1,6 +1,6 @@
 species.richness <- 
 function(dataset.all.species, landwatermask, distances=2:10, weight=0.5, 
-		dimension, shift, resolution=1, upperbound,  
+		dimension, origin, resolution=1, upperbound,  
 		all.species=-1, silent=TRUE, do.parallel=FALSE){
 	#check species
 	if (all.species[1]==-1){
@@ -44,7 +44,7 @@ function(dataset.all.species, landwatermask, distances=2:10, weight=0.5,
 			# iterate about distances
 			for (distance in distances){
 				species.range.distance[which(distance == distances),,] <- species.range(dataset.one.species, distance, 
-											dimension, shift, resolution, landwatermask, 
+											dimension, origin, resolution, landwatermask, 
 											upperbound)
 	
 				if (which(distance==distances)==1){
@@ -74,7 +74,7 @@ function(dataset.all.species, landwatermask, distances=2:10, weight=0.5,
 			# iterate about distances
 			for (distance in distances){
 				species.range.distance[which(distance == distances),,] <- species.range(dataset.one.species, distance, 
-											dimension, shift, resolution, landwatermask, 
+											dimension, origin, resolution, landwatermask, 
 											upperbound)
 	
 				if (which(distance==distances)==1){
@@ -105,3 +105,4 @@ function(dataset.all.species, landwatermask, distances=2:10, weight=0.5,
 
 	return(species.richness.weighted)
 }
+

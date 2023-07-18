@@ -1,5 +1,5 @@
 getNarrowEndemics <- function(dataset.all.species, all.species, 
-			narrow.endemic.limit, dimension, shift, 
+			narrow.endemic.limit, dimension, origin, 
 			resolution){
 	#check species
 	if (all.species[1]==-1){
@@ -15,7 +15,7 @@ getNarrowEndemics <- function(dataset.all.species, all.species,
 	}
 
 	# function to check narrow endemism of single species
-	isNarrowEndemic <- function(dataset.one.species, dimension, shift, resolution){
+	isNarrowEndemic <- function(dataset.one.species, dimension, origin, resolution){
 		# check number of occurrences
 		if (dim(dataset.one.species)[1] <= narrow.endemic.limit){
 			#check distance between occurrences
@@ -23,7 +23,7 @@ getNarrowEndemics <- function(dataset.all.species, all.species,
 			grid <- matrix(0,dimension[1],dimension[2])
 
 			#add points
-			grid <- data.into.Grid(dataset.one.species, dimension, shift, resolution)
+			grid <- data.into.Grid(dataset.one.species, dimension, origin, resolution)
 
 			#points into list
 			points <- which(grid > 0)
@@ -55,10 +55,11 @@ getNarrowEndemics <- function(dataset.all.species, all.species,
 	# check all species
 	for (species in all.species){
 		dataset.one.species <- extract.species(dataset.all.species, species)
-		if (isNarrowEndemic(dataset.one.species, dimension, shift, resolution)){
+		if (isNarrowEndemic(dataset.one.species, dimension, origin, resolution)){
 			all.narrow.endemics <- c(all.narrow.endemics, species)
 		}
 	}
 
 	return(all.narrow.endemics)
 }
+

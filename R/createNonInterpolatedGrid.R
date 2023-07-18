@@ -1,5 +1,5 @@
 createNonInterpolatedGrid <-
-function(dataset.all.species, dimension, shift, resolution=1, all.species=-1){
+function(dataset.all.species, dimension, origin, resolution=1, all.species=-1){
 	#check species
 	if (all.species[1]==-1){
 		all.species <- unique(dataset.all.species$speciesID)
@@ -19,8 +19,9 @@ function(dataset.all.species, dimension, shift, resolution=1, all.species=-1){
 
 	for (species in all.species){
 		dataset.one.species <- extract.species(dataset.all.species, species)
-		grid <- grid + data.into.Grid(dataset.one.species, dimension, shift, resolution)
+		grid <- grid + data.into.Grid(dataset.one.species, dimension, origin, resolution)
 	}
 
 	return(grid)
 }
+

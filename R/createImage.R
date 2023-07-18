@@ -1,5 +1,5 @@
 createImage <-
-function(grid, landwatermask, image.title, directory, filename, shift, parts=10, resolution=1){
+function(grid, landwatermask, image.title, directory, filename, origin, parts=10, resolution=1){
 	if ((dim(grid)[1] != dim(landwatermask)[1])||(dim(grid)[2] != dim(landwatermask)[2])){
 		return(FALSE)
 	}
@@ -34,8 +34,8 @@ function(grid, landwatermask, image.title, directory, filename, shift, parts=10,
 	for (m in 1:dimension[2]){
 		for (n in 1:dimension[1]){
 			richness[count] <- result[n,m]
-			x[count] <- shift[1] + resolution*n
-			y[count] <- shift[2] + resolution*m
+			x[count] <- origin[1] + resolution*n
+			y[count] <- origin[2] + resolution*m
 			count <- count + 1
 		}
 	}
@@ -66,3 +66,4 @@ function(grid, landwatermask, image.title, directory, filename, shift, parts=10,
 
 	return(TRUE)
 }
+

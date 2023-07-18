@@ -4,7 +4,7 @@
 \title{Species richness estimation without weighting}
 \description{This function estimates the species richness for a given distance based on given species occurrences without using weighting factor.}
 \usage{species.richness.nonweighted(dataset.all.species, landwatermask, 
-	distance=10, dimension, shift, resolution=1,
+	distance=10, dimension, origin, resolution=1,
 	upperbound, all.species=-1, silent=TRUE,
 	do.parallel=FALSE)}
 \arguments{
@@ -17,7 +17,7 @@
 		be added for land surfaces. In this case, take care of the 'upperbound' value.}
   \item{distance}{The distance which will be used for species range estimation.}
   \item{dimension}{The dimension of the processed grid.}
-  \item{shift}{The geographic coordinates of the origin of the grid.}
+  \item{origin}{The geographic coordinates of the origin of the grid.}
   \item{resolution}{The resolution of the grid in (geographical) degree.}
   \item{upperbound}{This value determines the height (based on values in 'landwatermask') 
 		which is considered to be a barrier for species distribution.}
@@ -43,15 +43,15 @@ data(dataset.landwater)
 
 ##create grid parameters
 dimension <- getDimension(dataset.all.species, resolution=1)
-shift <- getShift(dataset.all.species)
+origin <- getOrigin(dataset.all.species)
 
 ##create landwatermask
 landwatermask.nocoast <- createLandwatermask(dataset.landwater, 
-				dimension, shift, resolution=1)
+				dimension, origin, resolution=1)
 
 ##estimate species richness
 species.richness.noweight <- species.richness.nonweighted(dataset.all.species, 
 		landwatermask.nocoast, distance=5, dimension, 
-		shift, resolution=1, upperbound=5, all.species=1:2)
+		origin, resolution=1, upperbound=5, all.species=1:2)
 }
 

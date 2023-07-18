@@ -16,3 +16,4 @@ function(grid, point.a, point.b, landwatermask, upperbound){
 		return(FALSE)
 	}
 }
+

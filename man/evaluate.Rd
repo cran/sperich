@@ -39,16 +39,16 @@ data(dataset.landwater)
 
 #create grid parameters
 dimension <- getDimension(dataset.all.species, resolution=1)
-shift <- getShift(dataset.all.species)
+origin <- getOrigin(dataset.all.species)
 
 #create landwatermask
 landwatermask.nocoast <- createLandwatermask(dataset.landwater,
-dimension, shift, resolution=1)
+dimension, origin, resolution=1)
 
 #estimate species richness
 species.richness.weighted <- species.richness(dataset.all.species,
 landwatermask.nocoast, distances=1:5, weight=0.5, dimension,
-shift, resolution=1, upperbound=3000, all.species=1:2)
+origin, resolution=1, upperbound=3000, all.species=1:2)
 
 #evaluation
 \dontrun{

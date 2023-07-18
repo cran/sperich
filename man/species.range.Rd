@@ -3,7 +3,7 @@
 
 \title{Species range estimation}
 \description{This function estimates the species range based on given occurrences of one species.}
-\usage{species.range(dataset.one.species, distance, dimension, shift, 
+\usage{species.range(dataset.one.species, distance, dimension, origin, 
 	resolution=1, landwatermask, upperbound, cross.validation=FALSE)}
 \arguments{
   \item{dataset.one.species}{A dataset containing one species with its ID 
@@ -16,7 +16,7 @@
   \item{distance}{The maximum distance in which two occurrences are considered as related occurrences. 
 		These two occurrences will be connected with an edge.}
   \item{dimension}{The dimension of the processed grid.}
-  \item{shift}{The geographic coordinates of the origin of the grid.}
+  \item{origin}{The geographic coordinates of the origin of the grid.}
   \item{resolution}{The resolution of the grid in (geographical) degree.}
   \item{upperbound}{This value determines the height (based on values in 'landwatermask') 
 		which is considered to be a barrier for species distribution.}
@@ -39,17 +39,17 @@ data(dataset.landwater)
 
 ##create grid parameters
 dimension <- getDimension(dataset.all.species, resolution=1)
-shift <- getShift(dataset.all.species)
+origin <- getOrigin(dataset.all.species)
 
 ##create landwatermask
 landwatermask.nocoast <- createLandwatermask(dataset.landwater, 
-					dimension, shift, resolution=1)
+					dimension, origin, resolution=1)
 
 ##extract datasets of one species out of database
 dataset.one.species <- extract.species(dataset.all.species, 3)
 
 ##estimate species range
 species.range.tmp <- species.range(dataset.one.species, distance=5, 
-		dimension, shift, resolution=1, landwatermask.nocoast)
+		dimension, origin, resolution=1, landwatermask.nocoast)
 }
 

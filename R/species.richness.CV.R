@@ -1,6 +1,6 @@
 species.richness.cv <- 
 function(dataset.all.species, landwatermask, fold=5, loocv.limit=10, 
-		distances=3:10, weight=0.5, dimension, shift, resolution=1, 
+		distances=3:10, weight=0.5, dimension, origin, resolution=1, 
 		upperbound, all.species=-1, silent=TRUE, do.parallel=FALSE){
 	#check species
 	if (all.species[1]==-1){
@@ -59,7 +59,7 @@ function(dataset.all.species, landwatermask, fold=5, loocv.limit=10,
 
 						#calculate species range	
 						species.range.sub <- species.range(dataset.one.subsample, distance, dimension, 
-									shift, resolution, landwatermask, upperbound, cross.validation=TRUE)
+									origin, resolution, landwatermask, upperbound, cross.validation=TRUE)
 					
 						#sum over all subsamples
 						species.range.all.subs[which(distance == distances),,] <- species.range.all.subs[which(distance == distances),,] + species.range.sub
@@ -119,7 +119,7 @@ function(dataset.all.species, landwatermask, fold=5, loocv.limit=10,
 
 						#calculate species range	
 						species.range.sub <- species.range(dataset.one.subsample, distance, dimension, 
-									shift, resolution, landwatermask, upperbound, cross.validation=TRUE)
+									origin, resolution, landwatermask, upperbound, cross.validation=TRUE)
 					
 						#sum over all subsamples
 						species.range.all.subs[which(distance == distances),,] <- species.range.all.subs[which(distance == distances),,] + species.range.sub
@@ -157,3 +157,4 @@ function(dataset.all.species, landwatermask, fold=5, loocv.limit=10,
 
 	return(species.richness.weighted.cv)
 }
+

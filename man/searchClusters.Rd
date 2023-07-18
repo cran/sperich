@@ -3,11 +3,11 @@
 
 \title{Search clusters in the result grid of species richness estimation.}
 \description{This routine searches clusters in the result grid of species richness estimation.}
-\usage{searchClusters(species.richness, dimension, shift, resolution, clusterlimit)}
+\usage{searchClusters(species.richness, dimension, origin, resolution, clusterlimit)}
 \arguments{
   \item{species.richness}{The grid that should be adjusted. It contains the result of species richness estimation or cross-validation.}
   \item{dimension}{The dimension of the processed grid.}
-  \item{shift}{The geographic coordinates of the origin of the grid.}
+  \item{origin}{The geographic coordinates of the origin of the grid.}
   \item{resolution}{The resolution of the grid in (geographical) degree.}
   \item{clusterlimit}{The limit under which values of 'species.richness' should not be used to build clusters.}
 }
@@ -26,22 +26,22 @@ data(dataset.landwater)
 
 ##create grid parameters
 dimension <- getDimension(dataset.all.species, resolution=1)
-shift <- getShift(dataset.all.species)
+origin <- getOrigin(dataset.all.species)
 
 ##create landwatermask
 landwatermask.nocoast <- createLandwatermask(dataset.landwater, 
-				dimension, shift, resolution=1)
+				dimension, origin, resolution=1)
 
 ##estimate species richness
 species.richness.weighted <- species.richness(dataset.all.species,
 landwatermask.nocoast, distances=1:5, weight=0.5, dimension,
-shift, resolution=1, upperbound=3000, all.species=1:2)
+origin, resolution=1, upperbound=3000, all.species=1:2)
 
 ##prepare clustersearch
 clusterlimit <- 100
 
 ##adjust species richness
 clusterlist <- searchClusters(species.richness.weighted, 
-		dimension, shift, resolution=1, clusterlimit)
+		dimension, origin, resolution=1, clusterlimit)
 }
 

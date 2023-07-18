@@ -4,7 +4,7 @@
 \title{Species richness cross-validation}
 \description{This function cross-validates the species richness based on given species occurrences.}
 \usage{species.richness.cv(dataset.all.species, landwatermask, fold=5, 
-	loocv.limit=10, distances=3:10, weight=0.5, dimension, shift, 
+	loocv.limit=10, distances=3:10, weight=0.5, dimension, origin, 
 	resolution=1, upperbound, all.species=-1, 
 	silent=TRUE, do.parallel=FALSE)}
 \arguments{
@@ -20,7 +20,7 @@
   \item{distances}{The distances which will be used for species range estimation.}
   \item{weight}{The tuning parameter of the weighting procedure (details in Raedig et al. 2010).}
   \item{dimension}{The dimension of the processed grid.}
-  \item{shift}{The geographic coordinates of the origin of the grid.}
+  \item{origin}{The geographic coordinates of the origin of the grid.}
   \item{resolution}{The resolution of the grid in (geographical) degree.}
   \item{upperbound}{This value determines the height (based on values in 'landwatermask') 
 		which is considered to be a barrier for species distribution.}
@@ -47,16 +47,16 @@ data(dataset.landwater)
 
 ##create grid parameters
 dimension <- getDimension(dataset.all.species, resolution=1)
-shift <- getShift(dataset.all.species)
+origin <- getOrigin(dataset.all.species)
 
 ##create landwatermask
 landwatermask.nocoast <- createLandwatermask(dataset.landwater, 
-				dimension, shift, resolution=1)
+				dimension, origin, resolution=1)
 
 ##estimate species richness
 species.richness.weighted <- species.richness.cv(dataset.all.species, 
 		landwatermask.nocoast, fold=5, loocv.limit=10, distances=2:5, 
-		weight=0.5, dimension, shift, resolution=1, upperbound=5, 
+		weight=0.5, dimension, origin, resolution=1, upperbound=5, 
 		all.species=1:2)
 }
 

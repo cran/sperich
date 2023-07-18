@@ -26,3 +26,4 @@ function(species.richness, noninterpolatedgrid, clusterlist){
 
 	return(species.richness)
 }
+

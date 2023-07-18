@@ -1,12 +1,12 @@
 species.range <- 
-function(dataset.one.species, distance, dimension, shift, 
+function(dataset.one.species, distance, dimension, origin, 
 		resolution=1, landwatermask, upperbound=5, 
 		cross.validation=FALSE){	
 	#create grid
 	grid <- matrix(0,dimension[1],dimension[2])
 
 	#add points
-	grid <- data.into.Grid(dataset.one.species, dimension, shift, resolution)
+	grid <- data.into.Grid(dataset.one.species, dimension, origin, resolution)
 
 	#points into list
 	points <- which(grid > 0)
@@ -71,3 +71,4 @@ function(dataset.one.species, distance, dimension, shift,
 
 	return(grid)
 }
+

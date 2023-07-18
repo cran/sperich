@@ -15,3 +15,4 @@ function(point.a, point.b, resolution=1){
 
 	return(distance.ab)
 }
+
